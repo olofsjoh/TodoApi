@@ -1,0 +1,33 @@
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.deps.json
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.json
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.dev.json
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.dll
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.pdb
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csprojResolveAssemblyReference.cache
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csproj.CoreCompileInputs.cache
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfoInputs.cache
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfo.cs
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.dll
+c:\users\johannnes olofsson\documents\visual studio 2017\Projects\TodoApi\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.pdb
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.deps.json
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.json
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.dev.json
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.dll
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.pdb
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csprojResolveAssemblyReference.cache
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csproj.CoreCompileInputs.cache
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfoInputs.cache
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfo.cs
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.dll
+C:\Users\Johannnes Olofsson\Source\Repos\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.pdb
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.deps.json
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.json
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.runtimeconfig.dev.json
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.dll
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\bin\Debug\netcoreapp2.0\TodoApi.pdb
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csprojResolveAssemblyReference.cache
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.csproj.CoreCompileInputs.cache
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfoInputs.cache
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.AssemblyInfo.cs
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.dll
+C:\Users\Johannnes Olofsson\Source\Repos\Todo\TodoApi\obj\Debug\netcoreapp2.0\TodoApi.pdb
