@@ -8,7 +8,7 @@ namespace TodoApp
     {
         static void Main(string[] args)
         {
-            var facade = new TodoFacade("http://localhost:58071");
+            var facade = new JsonFacade("http://localhost:58071");
 
             var task = facade.GetTodoAsync(CancellationToken.None);
 

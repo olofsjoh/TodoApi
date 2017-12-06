@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 
 namespace TodoApp
 {
-    abstract class TodoFacade
+    abstract class Facade
     {
         protected HttpClient _client = new HttpClient();
 
-        public TodoFacade(string baseAddress)
+        public Facade(string baseAddress)
         {
             if (baseAddress == null)
                 throw new ArgumentException("baseAddress is null");

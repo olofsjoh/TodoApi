@@ -1,4 +1,6 @@
-﻿namespace TodoApi.Models
+﻿using System.Runtime.Serialization;
+
+namespace TodoApi.Models
 {
     public class Todo
     {
