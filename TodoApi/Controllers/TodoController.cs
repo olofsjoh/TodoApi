@@ -52,9 +52,9 @@ namespace TodoApi.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Todo item)
         {
-            if (item == null)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             _context.Todos.Add(item);
@@ -69,6 +69,11 @@ namespace TodoApi.Controllers
             if (item == null || item.Id != id)
             {
                 return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
 
             var todo = _context.Todos.FirstOrDefault(t => t.Id == id);

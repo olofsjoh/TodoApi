@@ -20,7 +20,7 @@ namespace IntegrationTests.TodoController
         }
 
         [Fact]
-        public async Task ReturnsListOfTodo()
+        public async Task ReturnsListOfTodos()
         {
             var response = await _client.GetAsync($"/api/todo");
             response.EnsureSuccessStatusCode();
