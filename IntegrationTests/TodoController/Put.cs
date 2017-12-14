@@ -70,6 +70,10 @@ namespace IntegrationTests.TodoController
             var response = await _client.PutAsync($"/api/{controllerName}/1", jsonContent);
 
             response.EnsureSuccessStatusCode();
+
+            var stringResponse = await response.Content.ReadAsStringAsync();
+
+
         }
 
         private Todo CreateValidTodo()

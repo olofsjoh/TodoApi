@@ -25,6 +25,8 @@ namespace IntegrationTests.TodoController
         {
             var response = await _client.DeleteAsync($"/api/{controllerName}/0");
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            var stringResponse = await response.Content.ReadAsStringAsync();
         }
 
         [Theory]
@@ -40,6 +42,8 @@ namespace IntegrationTests.TodoController
             var idToDelete = todos.FirstOrDefault().Id;
             var response2 = await _client.DeleteAsync($"/api/{controllerName}/{idToDelete}");
             response2.EnsureSuccessStatusCode();
+
+            var deleteMessage = await response2.Content.ReadAsStringAsync();
         }
     }
 }

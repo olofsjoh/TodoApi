@@ -27,26 +27,18 @@ namespace TodoApi.Controllers
         }
 
         [HttpGet("{id}", Name = "GetFilterTodo")]
+        [ValidateTodoExists]
         public async Task<IActionResult> GetById(int id)
         {
-            if ((await _todoRepository.ListAsync()).All(a => a.Id != id))
-            {
-                return NotFound(id);
-            }
             return Ok(await _todoRepository.GetByIdAsync(id));
         }
 
         [HttpPut("{id}")]
+        [ValidateTodoExists]
         public async Task<IActionResult> Update(int id, [FromBody] Todo item)
         {
-            if ((await _todoRepository.ListAsync()).All(a => a.Id != id))
-            {
-                return NotFound(id);
-            }
-
-            item.Id = id;
             await _todoRepository.UpdateAsync(item);
-            return Ok();
+            return Ok(new ApiOkResponse(item));
         }
 
         // POST api/values
@@ -60,14 +52,11 @@ namespace TodoApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [ValidateTodoExists]
         public async Task<IActionResult> Delete(int id)
         {
-            if ((await _todoRepository.ListAsync()).All(a => a.Id != id))
-            {
-                return NotFound(id);
-            }
             await _todoRepository.DeleteAsync(id);
-            return Ok();
+            return Ok(new ApiOkResponse($"Todo deleted with id {id}"));
         }
     }
 }

@@ -27,11 +27,12 @@ namespace TodoApi.Controllers
         [HttpGet("{id}", Name = "GetTodo")]
         public async Task<IActionResult> GetById(int id)
         {
-            if ((await _todoRepository.ListAsync()).All(a => a.Id != id))
+            var todo = await _todoRepository.GetByIdAsync(id);
+            if (todo == null)
             {
-                return NotFound(id);
+                return NotFound();
             }
-            return Ok(await _todoRepository.GetByIdAsync(id));
+            return Ok(new ApiOkResponse(todo));
         }
 
         // POST api/values
@@ -51,9 +52,10 @@ namespace TodoApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Todo item)
         {
-            if ((await _todoRepository.ListAsync()).All(a => a.Id != id))
+            var todo = await _todoRepository.GetByIdAsync(id);
+            if (todo == null)
             {
-                return NotFound(id);
+                return NotFound();
             }
 
             if (!ModelState.IsValid)
@@ -61,21 +63,21 @@ namespace TodoApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            item.Id = id;
-            await _todoRepository.UpdateAsync(item);
-            return Ok();
+            await _todoRepository.UpdateAsync(todo);
+            return Ok(new ApiOkResponse(todo));
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            if ((await _todoRepository.ListAsync()).All(a => a.Id != id))
+            var todo = await _todoRepository.GetByIdAsync(id);
+            if (todo == null)
             {
-                return NotFound(id);
+                return NotFound(new ApiResponse(404, $"Todo not found with id {id}"));
             }
             await _todoRepository.DeleteAsync(id);
-            return Ok();
+            return Ok(new ApiOkResponse($"Todo deleted with id {id}"));
         }
     }
 }
