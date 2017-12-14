@@ -19,10 +19,12 @@ namespace IntegrationTests.TodoController
             _client = base.GetClient();
         }
 
-        [Fact]
-        public async Task ReturnsListOfTodos()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsListOfTodos(string controllerName)
         {
-            var response = await _client.GetAsync($"/api/todo");
+            var response = await _client.GetAsync($"/api/{controllerName}");
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<IEnumerable<Todo>>(stringResponse).ToList();

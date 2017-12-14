@@ -6,7 +6,7 @@ namespace TodoApi.Models
     public class Todo
     {
         [Required]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(20)]

@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TodoApi.Filters;
 using TodoApi.Interfaces;
 using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
     [Route("api/[controller]")]
-    public class TodoController : Controller
+    [ValidateModel]
+    public class TodoFilterController : Controller
     {
         private readonly ITodoRepository _todoRepository;
 
-        public TodoController(ITodoRepository todoRepository)
+        public TodoFilterController(ITodoRepository todoRepository)
         {
             _todoRepository = todoRepository;
         }
@@ -24,7 +26,7 @@ namespace TodoApi.Controllers
             return await _todoRepository.ListAsync();
         }
 
-        [HttpGet("{id}", Name = "GetTodo")]
+        [HttpGet("{id}", Name = "GetFilterTodo")]
         public async Task<IActionResult> GetById(int id)
         {
             if ((await _todoRepository.ListAsync()).All(a => a.Id != id))
@@ -32,20 +34,6 @@ namespace TodoApi.Controllers
                 return NotFound(id);
             }
             return Ok(await _todoRepository.GetByIdAsync(id));
-        }
-
-        // POST api/values
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Todo item)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            await _todoRepository.AddAsync(item);
-
-            return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
         }
 
         [HttpPut("{id}")]
@@ -56,14 +44,18 @@ namespace TodoApi.Controllers
                 return NotFound(id);
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             item.Id = id;
             await _todoRepository.UpdateAsync(item);
             return Ok();
+        }
+
+        // POST api/values
+        [HttpPost]
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Todo item)
+        {
+            await _todoRepository.AddAsync(item);
+            return CreatedAtRoute("GetFilterTodo", new { id = item.Id }, item);
         }
 
         // DELETE api/values/5

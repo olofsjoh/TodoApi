@@ -17,35 +17,41 @@ namespace IntegrationTests.TodoController
             _client = base.GetClient();
         }
 
-        [Fact]
-        public async Task ReturnsNotFoundForId0()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsNotFoundForId0(string controllerName)
         {
             var todo = CreateMissingTodo();
 
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PutAsync("/api/todo", jsonContent);
+            var response = await _client.PutAsync($"/api/{controllerName}", jsonContent);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        [Fact]
-        public async Task ReturnsBadRequestGivenNoName()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsBadRequestGivenNoName(string controllerName)
         {
             var todo = CreateEmptyNameTodo();
 
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PutAsync("/api/todo/1", jsonContent);
+            var response = await _client.PutAsync($"/api/{controllerName}/1", jsonContent);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
 
-        [Fact]
-        public async Task ReturnsBadRequestGivenTooLongName()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsBadRequestGivenTooLongName(string controllerName)
         {
             var todo = CreateTooLongNameTodo();
 
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PutAsync("/api/todo/1", jsonContent);
+            var response = await _client.PutAsync($"/api/{controllerName}/1", jsonContent);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
@@ -54,12 +60,14 @@ namespace IntegrationTests.TodoController
             Assert.Contains("The field Name must be a string or array type with a maximum length of '20'.", stringResponse);
         }
 
-        [Fact]
-        public async Task ReturnsOkGivenValidTodo()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsOkGivenValidTodo(string controllerName)
         {
             var todo = CreateValidTodo();
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PutAsync("/api/todo/1", jsonContent);
+            var response = await _client.PutAsync($"/api/{controllerName}/1", jsonContent);
 
             response.EnsureSuccessStatusCode();
         }

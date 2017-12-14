@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using TodoApi.Models;
 using Microsoft.EntityFrameworkCore;
+using TodoApi.Infrastructure.Data;
+using TodoApi.Interfaces;
 
 namespace TodoApi
 {
@@ -26,7 +28,8 @@ namespace TodoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("Todos"));
+            services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("Todos"));
+
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
@@ -35,7 +38,9 @@ namespace TodoApi
                 options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
                 options.OutputFormatters.Add(new TodoCsvFormatter());
             })
-                .AddXmlSerializerFormatters();
+            .AddXmlSerializerFormatters();
+
+            services.AddScoped<ITodoRepository, TodoRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +52,25 @@ namespace TodoApi
             }
 
             app.UseMvc();
+
+            PopulateTestData(app);
+        }
+
+        private void PopulateTestData(IApplicationBuilder app)
+        {
+            var dbContext = app.ApplicationServices.GetService<AppDbContext>();
+            var todos = dbContext.Todos;
+            foreach (var todo in todos)
+            {
+                dbContext.Remove(todo);
+            }
+            dbContext.SaveChanges();
+
+            dbContext.Todos.Add(new Todo { Id = 1, Name = "Start the dishwasher", IsComplete = true });
+            dbContext.Todos.Add(new Todo { Id = 2, Name = "Buy milk", IsComplete = false });
+            dbContext.Todos.Add(new Todo { Id = 3, Name = "Pay bills", IsComplete = true });
+
+            dbContext.SaveChanges();
         }
     }
 }

@@ -18,12 +18,14 @@ namespace IntegrationTests.TodoController
             _client = base.GetClient();
         }
 
-        [Fact]
-        public async Task ReturnsOkGivenValidTodo()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsOkGivenValidTodo(string controllerName)
         {
             var todo = CreateValidTodo();
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"/api/todo", jsonContent);
+            var response = await _client.PostAsync($"/api/{controllerName}", jsonContent);
             response.EnsureSuccessStatusCode();
 
             var stringResponse = await response.Content.ReadAsStringAsync();
@@ -34,24 +36,28 @@ namespace IntegrationTests.TodoController
             Assert.True(createdTodo.Id > 0);
         }
 
-        [Fact]
-        public async Task ReturnsNotOkGivenNullTodo()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsNotOkGivenNullTodo(string controllerName)
         {
             var todo = CreateNullTodo();
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"/api/todo", jsonContent);
+            var response = await _client.PostAsync($"/api/{controllerName}", jsonContent);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 
             var stringResponse = await response.Content.ReadAsStringAsync();
         }
 
-        [Fact]
-        public async Task ReturnsNotOkGivenEmptyNameTodo()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsNotOkGivenEmptyNameTodo(string controllerName)
         {
             var todo = CreateInvalidTodo();
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"/api/todo", jsonContent);
+            var response = await _client.PostAsync($"/api/{controllerName}", jsonContent);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             var stringResponse = await response.Content.ReadAsStringAsync();
@@ -59,12 +65,14 @@ namespace IntegrationTests.TodoController
             Assert.Contains("The Name field is required.", stringResponse);
         }
 
-        [Fact]
-        public async Task ReturnsNotOkGivenTooLongNameTodo()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsNotOkGivenTooLongNameTodo(string controllerName)
         {
             var todo = CreateNameTooLongTodo();
             var jsonContent = new StringContent(JsonConvert.SerializeObject(todo), Encoding.UTF8, "application/json");
-            var response = await _client.PostAsync($"/api/todo", jsonContent);
+            var response = await _client.PostAsync($"/api/{controllerName}", jsonContent);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
 

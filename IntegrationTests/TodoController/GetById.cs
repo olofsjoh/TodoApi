@@ -19,17 +19,21 @@ namespace IntegrationTests.TodoController
             _client = base.GetClient();
         }
 
-        [Fact]
-        public async Task ReturnsNotFoundForId0()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsNotFoundForId0(string controllerName)
         {
-            var response = await _client.GetAsync($"/api/todo/0");
+            var response = await _client.GetAsync($"/api/{controllerName}/0");
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
 
-        [Fact]
-        public async Task ReturnsCorrectOfTodos()
+        [Theory]
+        [InlineData("todo")]
+        [InlineData("todofilter")]
+        public async Task ReturnsCorrectOfTodos(string controllerName)
         {
-            var response = await _client.GetAsync($"/api/todo/1");
+            var response = await _client.GetAsync($"/api/{controllerName}/1");
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<Todo>(stringResponse);
