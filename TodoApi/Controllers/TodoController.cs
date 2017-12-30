@@ -32,7 +32,7 @@ namespace TodoApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(new ApiOkResponse(todo));
+            return Ok(todo);
         }
 
         // POST api/values
@@ -63,8 +63,13 @@ namespace TodoApi.Controllers
                 return BadRequest(ModelState);
             }
 
+            todo.IsComplete = item.IsComplete;
+            todo.Name = item.Name;
+
             await _todoRepository.UpdateAsync(todo);
-            return Ok(new ApiOkResponse(todo));
+            return Ok();
+
+           
         }
 
         // DELETE api/values/5

@@ -30,11 +30,13 @@ namespace TodoApi
         {
             services.AddDbContext<AppDbContext>(opt => opt.UseInMemoryDatabase("Todos"));
 
+
+
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
-                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("text/json"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
                 options.FormatterMappings.SetMediaTypeMappingForFormat("csv", MediaTypeHeaderValue.Parse("text/csv"));
                 options.OutputFormatters.Add(new TodoCsvFormatter());
             })
@@ -52,6 +54,13 @@ namespace TodoApi
             }
 
             app.UseMvc();
+        }
+
+        public void ConfigureTesting(IApplicationBuilder app,
+            IHostingEnvironment env,
+            ILoggerFactory loggerFactory)
+        {
+            this.Configure(app, env);
 
             PopulateTestData(app);
         }
